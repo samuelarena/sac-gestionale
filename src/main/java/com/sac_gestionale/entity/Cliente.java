@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 @Table(name = "clienti") // Specifica il nome esatto della tabella su PostgreSQL
 @SQLDelete(sql = "UPDATE clienti SET cancellato = true WHERE id = ?")
 @SQLRestriction("cancellato = false")
-public class Cliente {
+public class Cliente extends Auditable {
 
     @Id // Dichiara che questo campo è la Chiave Primaria (PK)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Dice al DB di generare l'ID in automatico (1, 2, 3...)

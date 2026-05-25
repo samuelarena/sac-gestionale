@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 @SpringBootApplication
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 @SecurityScheme(
     name = "basicAuth",
     type = SecuritySchemeType.HTTP,

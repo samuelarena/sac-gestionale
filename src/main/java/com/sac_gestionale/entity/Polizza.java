@@ -24,7 +24,7 @@ import jakarta.persistence.CascadeType;
 @Table(name = "polizze")
 @SQLDelete(sql = "UPDATE polizze SET cancellato = true WHERE id = ?")
 @SQLRestriction("cancellato = false")
-public class Polizza {
+public class Polizza extends Auditable {
     @Id // Dichiara che questo campo è la Chiave Primaria (PK)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
