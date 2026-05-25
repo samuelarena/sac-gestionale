@@ -35,15 +35,15 @@ public class Sinistro {
     private String descrizione;
 
     @PastOrPresent
-    @Column(name = "data_sinistro", nullable = false)
-    private LocalDate dataSinistro;
+    @Column(name = "data_evento", nullable = false)
+    private LocalDate dataEvento;
 
     @Positive
-    @Column(name = "danno_stimato", precision = 10, scale = 2)
-    private BigDecimal dannoStimato;
+    @Column(name = "stima_danno", precision = 10, scale = 2)
+    private BigDecimal stimaDanno;
 
-    @Column(name = "stato_pratica")
-    private String statoPratica = "APERTO";
+    @Column(name = "stato_lavorazione")
+    private String statoLavorazione = "APERTO";
 
     @ManyToOne
     @JoinColumn(name = "polizza_id", nullable = false)
@@ -73,14 +73,14 @@ public class Sinistro {
     public String getDescrizione() { return descrizione; }
     public void setDescrizione(String descrizione) { this.descrizione = descrizione; }
 
-    public LocalDate getDataSinistro() { return dataSinistro; }
-    public void setDataSinistro(LocalDate dataSinistro) { this.dataSinistro = dataSinistro; }
+    public LocalDate getDataEvento() { return dataEvento; }
+    public void setDataEvento(LocalDate dataEvento) { this.dataEvento = dataEvento; }
 
-    public BigDecimal getDannoStimato() { return dannoStimato; }
-    public void setDannoStimato(BigDecimal dannoStimato) { this.dannoStimato = dannoStimato; }
+    public BigDecimal getStimaDanno() { return stimaDanno; }
+    public void setStimaDanno(BigDecimal stimaDanno) { this.stimaDanno = stimaDanno; }
 
-    public String getStatoPratica() { return statoPratica; }
-    public void setStatoPratica(String statoPratica) { this.statoPratica = statoPratica; }
+    public String getStatoLavorazione() { return statoLavorazione; }
+    public void setStatoLavorazione(String statoLavorazione) { this.statoLavorazione = statoLavorazione; }
 
     public Polizza getPolizza() { return polizza; }
     public void setPolizza(Polizza polizza) { this.polizza = polizza; }

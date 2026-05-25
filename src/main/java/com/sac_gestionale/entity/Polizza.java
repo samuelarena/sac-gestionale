@@ -1,6 +1,8 @@
 package com.sac_gestionale.entity;
 
 import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -31,7 +33,10 @@ public class Polizza extends Auditable {
     @NotBlank
     @Column(unique = true)
     private String numeroPolizza;
-    private String tipo;
+    private String tipoRamo;
+    private BigDecimal premioAnnuale;
+    private LocalDate dataScadenza;
+    private String stato = "Attiva";
     @NotBlank
     @Size(min = 7, max = 7)
     @Pattern(regexp = "^[A-Z]{2}[0-9]{3}[A-Z]{2}$")
@@ -64,11 +69,29 @@ public class Polizza extends Auditable {
     public void setNumeroPolizza(String numeroPolizza) {
         this.numeroPolizza = numeroPolizza;
     }
-    public String getTipo() {
-        return tipo;
+    public String getTipoRamo() {
+        return tipoRamo;
     }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoRamo(String tipoRamo) {
+        this.tipoRamo = tipoRamo;
+    }
+    public BigDecimal getPremioAnnuale() {
+        return premioAnnuale;
+    }
+    public void setPremioAnnuale(BigDecimal premioAnnuale) {
+        this.premioAnnuale = premioAnnuale;
+    }
+    public LocalDate getDataScadenza() {
+        return dataScadenza;
+    }
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
+    }
+    public String getStato() {
+        return stato;
+    }
+    public void setStato(String stato) {
+        this.stato = stato;
     }
     
     public Cliente getCliente() {

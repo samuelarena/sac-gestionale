@@ -26,9 +26,14 @@ public class Documento {
     private LocalDate dataCaricamento;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
     @JsonBackReference
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "sinistro_id")
+    @JsonBackReference
+    private Sinistro sinistro;
 
     public Documento() {
     }
@@ -79,5 +84,13 @@ public class Documento {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Sinistro getSinistro() {
+        return sinistro;
+    }
+
+    public void setSinistro(Sinistro sinistro) {
+        this.sinistro = sinistro;
     }
 }

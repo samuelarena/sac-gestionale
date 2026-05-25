@@ -39,6 +39,19 @@ public class DocumentoController {
         }
     }
 
+    @PostMapping("/sinistri/{sinistroId}")
+    public ResponseEntity<?> uploadDocumentoSinistro(
+            @PathVariable Integer sinistroId,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            Documento salvato = documentoService.salvaDocumentoSinistro(sinistroId, file);
+            return ResponseEntity.ok(salvato);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore durante il caricamento del file: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadDocumento(@PathVariable Long id) {
         try {

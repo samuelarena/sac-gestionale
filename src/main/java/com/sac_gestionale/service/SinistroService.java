@@ -57,8 +57,8 @@ public class SinistroService {
             .orElseThrow(() -> new IllegalArgumentException("Sinistro non trovato"));
             
         esistente.setDescrizione(sinistroAggiornato.getDescrizione());
-        esistente.setDannoStimato(sinistroAggiornato.getDannoStimato());
-        esistente.setStatoPratica(sinistroAggiornato.getStatoPratica());
+        esistente.setStimaDanno(sinistroAggiornato.getStimaDanno());
+        esistente.setStatoLavorazione(sinistroAggiornato.getStatoLavorazione());
         // Non aggiorniamo data_sinistro o numero_sinistro perché sono dati storici immutabili
         
         return sinistroRepository.save(esistente);

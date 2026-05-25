@@ -13,7 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sac_gestionale.entity.Cliente;
 import com.sac_gestionale.entity.Documento;
+import com.sac_gestionale.entity.Sinistro;
 import com.sac_gestionale.repository.ClienteRepository;
+import com.sac_gestionale.repository.DocumentoRepository;
+import com.sac_gestionale.repository.SinistroRepository;
 import com.sac_gestionale.repository.DocumentoRepository;
 
 @Service
@@ -21,13 +24,15 @@ public class DocumentoService {
 
     private final DocumentoRepository documentoRepository;
     private final ClienteRepository clienteRepository;
+    private final SinistroRepository sinistroRepository;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public DocumentoService(DocumentoRepository documentoRepository, ClienteRepository clienteRepository) {
+    public DocumentoService(DocumentoRepository documentoRepository, ClienteRepository clienteRepository, SinistroRepository sinistroRepository) {
         this.documentoRepository = documentoRepository;
         this.clienteRepository = clienteRepository;
+        this.sinistroRepository = sinistroRepository;
     }
 
     public Documento salvaDocumento(Integer clienteId, MultipartFile file) throws IOException {
@@ -61,6 +66,35 @@ public class DocumentoService {
         documento.setPercorsoFisico(percorsoFinale.toAbsolutePath().toString());
         documento.setDataCaricamento(LocalDate.now());
         documento.setCliente(cliente);
+
+        return documentoRepository.save(documento);
+    }
+
+    public Documento salvaDocumentoSinistro(Integer sinistroId, MultipartFile file) throws IOException {
+        Sinistro sinistro = sinistroRepository.findById(sinistroId)
+                .orElseThrow(() -> new RuntimeException("Sinistro non trovato con ID: " + sinistroId));
+
+        String cartellaBase = uploadDir + "/sinistri/" + sinistroId;
+        Path uploadPath = Paths.get(cartellaBase);
+
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        String nomeOriginale = file.getOriginalFilename();
+        if (nomeOriginale == null) {
+            nomeOriginale = "documento_sconosciuto";
+        }
+        
+        Path percorsoFinale = uploadPath.resolve(nomeOriginale);
+        Files.copy(file.getInputStream(), percorsoFinale, StandardCopyOption.REPLACE_EXISTING);
+
+        Documento documento = new Documento();
+        documento.setNomeFile(nomeOriginale);
+        documento.setTipo(file.getContentType());
+        documento.setPercorsoFisico(percorsoFinale.toAbsolutePath().toString());
+        documento.setDataCaricamento(LocalDate.now());
+        documento.setSinistro(sinistro);
 
         return documentoRepository.save(documento);
     }

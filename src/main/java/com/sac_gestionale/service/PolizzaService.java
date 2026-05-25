@@ -76,7 +76,7 @@ public class PolizzaService {
 
         // Aggiorna solo i dati anagrafici intoccando lo storico rinnovi
         esistente.setTarga(polizzaAggiornata.getTarga());
-        esistente.setTipo(polizzaAggiornata.getTipo());
+        esistente.setTipoRamo(polizzaAggiornata.getTipoRamo());
         // Aggiungi qui altri campi base se necessario (es. cliente_id)
         
         return polizzaRepository.save(esistente);
