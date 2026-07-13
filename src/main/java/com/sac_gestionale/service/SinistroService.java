@@ -71,4 +71,8 @@ public class SinistroService {
     public long contaSinistri() {
         return sinistroRepository.count();
     }
+
+    public List<Sinistro> ricercaPerNomeECognomeCliente(String nome, String cognome) {
+        return sinistroRepository.findByPolizzaClienteNomeContainingIgnoreCaseAndPolizzaClienteCognomeContainingIgnoreCase(nome, cognome);
+    }
 }

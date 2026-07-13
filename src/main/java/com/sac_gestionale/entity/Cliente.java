@@ -35,7 +35,7 @@ public class Cliente extends Auditable {
     private String telefono;
     private String indirizzoResidenza;
     @OneToMany (mappedBy = "cliente")
-    @JsonManagedReference
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties("cliente")
     private List<Polizza> polizze;
     @OneToMany(mappedBy = "cliente", cascade = jakarta.persistence.CascadeType.ALL)
     @JsonManagedReference

@@ -43,13 +43,13 @@ public class Polizza extends Auditable {
     private String targa;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    @JsonBackReference
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties("polizze")
     private Cliente cliente;
     @OneToMany(mappedBy = "polizza", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Rinnovo> rinnovi;
     @OneToMany(mappedBy = "polizza")
-    @JsonManagedReference
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties("polizza")
     private List<Sinistro> sinistri;
     @Column(columnDefinition = "boolean default false")
     private Boolean cancellato = false;

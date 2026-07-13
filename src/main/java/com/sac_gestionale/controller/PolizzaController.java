@@ -71,4 +71,8 @@ public class PolizzaController {
         return polizzaService.trovaPolizzeInScadenza(giorni);
     }
     
+    @GetMapping("/ricerca-cliente")
+    public List<Polizza> ricercaPerNomeECognomeCliente(@RequestParam String nome, @RequestParam String cognome) {
+        return polizzaService.ricercaPerNomeECognomeCliente(nome, cognome);
+    }
 }

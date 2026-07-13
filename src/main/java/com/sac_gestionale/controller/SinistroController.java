@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sac_gestionale.entity.Sinistro;
 import com.sac_gestionale.service.SinistroService;
@@ -53,5 +54,10 @@ public class SinistroController {
     @DeleteMapping("/{id}")
     public void deleteSinistro(@PathVariable Integer id) {
         sinistroService.eliminaSinistro(id);
+    }
+
+    @GetMapping("/ricerca-cliente")
+    public List<Sinistro> ricercaPerNomeECognomeCliente(@RequestParam String nome, @RequestParam String cognome) {
+        return sinistroService.ricercaPerNomeECognomeCliente(nome, cognome);
     }
 }

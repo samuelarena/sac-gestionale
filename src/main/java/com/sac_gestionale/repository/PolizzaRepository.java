@@ -26,4 +26,6 @@ public interface PolizzaRepository extends JpaRepository<Polizza, Integer> {
 
     @Query("SELECT p FROM Polizza p JOIN p.rinnovi r WHERE p.cancellato = false AND r.attivo = true AND r.dataScadenza BETWEEN :oggi AND :dataLimite")
     List<Polizza> findByScadenzaPolizze (@Param("oggi") LocalDate oggi, @Param("dataLimite") LocalDate dataLimite);
+
+    List<Polizza> findByClienteNomeContainingIgnoreCaseAndClienteCognomeContainingIgnoreCase(String nome, String cognome);
 }

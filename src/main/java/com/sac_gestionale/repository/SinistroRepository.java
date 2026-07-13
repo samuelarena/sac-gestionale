@@ -11,4 +11,6 @@ public interface SinistroRepository extends JpaRepository<Sinistro, Integer> {
     List<Sinistro> findByPolizzaTarga(String targa);
     
     boolean existsByNumeroSinistro(String numeroSinistro);
+
+    List<Sinistro> findByPolizzaClienteNomeContainingIgnoreCaseAndPolizzaClienteCognomeContainingIgnoreCase(String nome, String cognome);
 }

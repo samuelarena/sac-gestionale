@@ -103,4 +103,8 @@ public class PolizzaService {
         LocalDate limite = oggi.plusDays(giorni);
         return polizzaRepository.findByScadenzaPolizze(oggi, limite);
     }
+
+    public List<Polizza> ricercaPerNomeECognomeCliente(String nome, String cognome) {
+        return polizzaRepository.findByClienteNomeContainingIgnoreCaseAndClienteCognomeContainingIgnoreCase(nome, cognome);
+    }
 }

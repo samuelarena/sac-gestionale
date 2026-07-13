@@ -39,4 +39,8 @@ public Cliente salvaCliente(Cliente nuovoCliente) {
     public Optional<Cliente> trovaClientePerCf(String codiceFiscale)  {
         return clienteRepository.findByCodiceFiscale(codiceFiscale);
     }
+
+    public List<Cliente> ricercaPerNomeECognome(String nome, String cognome) {
+        return clienteRepository.findByNomeContainingIgnoreCaseAndCognomeContainingIgnoreCase(nome, cognome);
+    }
 }

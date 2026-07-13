@@ -47,7 +47,7 @@ public class Sinistro {
 
     @ManyToOne
     @JoinColumn(name = "polizza_id", nullable = false)
-    @JsonBackReference
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties("sinistri")
     private Polizza polizza;
 
     @Column(columnDefinition = "boolean default false")
